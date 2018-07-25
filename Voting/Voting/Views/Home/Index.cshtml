@@ -15,13 +15,13 @@
         {
             if (question.Votes > 50)
             {
-                <div class="col-md-4">
-                    <h3>@question.Question</h3>
-                    <p>Total Votes: @question.Votes</p>
-                    <p>Yes: @question.For</p>
-                    <p>No: @question.Against</p>
-                    <p><a class="btn btn-default" href="">Vote Now! &raquo;</a></p>
-                </div>
+    <div class="col-md-4">
+        <h3>@question.Question</h3>
+        <p>Total Votes: @question.Votes</p>
+        <p>Yes: @question.For</p>
+        <p>No: @question.Against</p>
+        @Html.ActionLink("Vote Now!", "Vote", "Home", new { @class = "btn btn-primary" })
+    </div>
             }
         }
     }
@@ -35,13 +35,13 @@
         {
             if (question.Votes < 51 && question.Votes > 0)
             {
-                <div class="col-md-4">
-                    <h3>@question.Question</h3>
-                    <p>Total Votes: @question.Votes</p>
-                    <p>Yes: @question.For</p>
-                    <p>No: @question.Against</p>
-                    <p><a class="btn btn-default" href="">Vote Now! &raquo;</a></p>
-                </div>
+    <div class="col-md-4">
+        <h3>@question.Question</h3>
+        <p>Total Votes: @question.Votes</p>
+        <p>Yes: @question.For</p>
+        <p>No: @question.Against</p>
+        @Html.ActionLink("Vote Now!", "Vote", "Home", new { @class = "btn btn-primary" })
+    </div>
             }
         }
     }
@@ -55,13 +55,13 @@
         {
             if (question.Votes == 0)
             {
-                <div class="col-md-4">
-                    <h3>@question.Question</h3>
-                    <p>Total Votes: @question.Votes</p>
-                    <p>Yes: @question.For</p>
-                    <p>No: @question.Against</p>
-                    <p><a class="btn btn-default" href="">Vote Now! &raquo;</a></p>
-                </div>
+    <div class="col-md-4">
+        <h3>@question.Question</h3>
+        <p>Total Votes: @question.Votes</p>
+        <p>Yes: @question.For</p>
+        <p>No: @question.Against</p>
+        @Html.ActionLink("Vote Now!", "Vote", "Home", new { @class = "btn btn-primary" })
+    </div>
             }
         }
     }

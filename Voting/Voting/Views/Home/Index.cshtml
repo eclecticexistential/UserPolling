@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron text-center">
+    <h1>Your Opinion Matters</h1>
+</div>
+
+<div class="row">
+    <h1 class="text-center">Top Questions of @DateTime.Now.ToString("MM-dd-yyyy")</h1>
+    @using (var questions = new VoteContext())
+    {
+        var listOfQuestions = questions.AskedQuestions.ToList();
+        foreach (var question in listOfQuestions)
+        {
+            if (question.Votes > 50)
+            {
+                <div class="col-md-4">
+                    <h3>@question.Question</h3>
+                    <p>Total Votes: @question.Votes</p>
+                    <p>Yes: @question.For</p>
+                    <p>No: @question.Against</p>
+                    <p><a class="btn btn-default" href="">Vote Now! &raquo;</a></p>
+                </div>
+            }
+        }
+    }
+</div>
+<div class="row">
+    <h1 class="text-center">Trending Questions</h1>
+    @using (var questions = new VoteContext())
+    {
+        var listOfQuestions = questions.AskedQuestions.ToList();
+        foreach (var question in listOfQuestions)
+        {
+            if (question.Votes < 51 && question.Votes > 0)
+            {
+                <div class="col-md-4">
+                    <h3>@question.Question</h3>
+                    <p>Total Votes: @question.Votes</p>
+                    <p>Yes: @question.For</p>
+                    <p>No: @question.Against</p>
+                    <p><a class="btn btn-default" href="">Vote Now! &raquo;</a></p>
+                </div>
+            }
+        }
+    }
+</div>
+<div class="row">
+    <h1 class="text-center">New Questions</h1>
+    @using (var questions = new VoteContext())
+    {
+        var listOfQuestions = questions.AskedQuestions.ToList();
+        foreach (var question in listOfQuestions)
+        {
+            if (question.Votes == 0)
+            {
+                <div class="col-md-4">
+                    <h3>@question.Question</h3>
+                    <p>Total Votes: @question.Votes</p>
+                    <p>Yes: @question.For</p>
+                    <p>No: @question.Against</p>
+                    <p><a class="btn btn-default" href="">Vote Now! &raquo;</a></p>
+                </div>
+            }
+        }
+    }
+</div>

@@ -9,60 +9,44 @@
 <div class="row">
     <h1 class="text-center">Top Questions of @DateTime.Now.ToString("MM-dd-yyyy")</h1>
     @using (var questions = new VoteContext())
-    {
-        var listOfQuestions = questions.AskedQuestions.ToList();
-        foreach (var question in listOfQuestions)
-        {
-            if (question.Votes > 50)
-            {
+                {
+                    var listOfQuestions = questions.AskedQuestions.ToList();
+                    int counter = 0;
+                    foreach (var question in listOfQuestions)
+                    {
+                        var user = User.Identity.Name;
+                        var asked = questions.UserVotes.SingleOrDefault(x => x.UserId == user && x.QuestionsId == question.Id);
+                        if (question.Votes > 50 && counter < 11)
+                        {
     <div class="col-md-4">
         <h3>@question.Question</h3>
         <p>Total Votes: @question.Votes</p>
         <p>Yes: @question.For</p>
         <p>No: @question.Against</p>
-        @Html.ActionLink("Vote Now!", "Vote", "Home", new { @class = "btn btn-primary" })
-    </div>
-            }
-        }
-    }
-</div>
-<div class="row">
-    <h1 class="text-center">Trending Questions</h1>
-    @using (var questions = new VoteContext())
-    {
-        var listOfQuestions = questions.AskedQuestions.ToList();
-        foreach (var question in listOfQuestions)
-        {
-            if (question.Votes < 51 && question.Votes > 0)
+        @if (asked == null)
             {
-    <div class="col-md-4">
-        <h3>@question.Question</h3>
-        <p>Total Votes: @question.Votes</p>
-        <p>Yes: @question.For</p>
-        <p>No: @question.Against</p>
-        @Html.ActionLink("Vote Now!", "Vote", "Home", new { @class = "btn btn-primary" })
-    </div>
+                using (Html.BeginForm())
+                {
+                    var questNum = question.Id;
+                    @Html.Hidden("questNum", questNum);
+        <button type="submit" class="btn btn-success" value=0 name="answer">Yes</button>
+        <button type="submit" class="btn btn-warning" value=1 name="answer">No</button>
             }
         }
-    }
-</div>
-<div class="row">
-    <h1 class="text-center">New Questions</h1>
-    @using (var questions = new VoteContext())
-    {
-        var listOfQuestions = questions.AskedQuestions.ToList();
-        foreach (var question in listOfQuestions)
+        else
         {
-            if (question.Votes == 0)
-            {
-    <div class="col-md-4">
-        <h3>@question.Question</h3>
-        <p>Total Votes: @question.Votes</p>
-        <p>Yes: @question.For</p>
-        <p>No: @question.Against</p>
-        @Html.ActionLink("Vote Now!", "Vote", "Home", new { @class = "btn btn-primary" })
+            var vote = "";
+            if (asked.Vote == 0)
+            { vote = "Yes"; }
+            else { vote = "No"; }
+    <p>
+        You voted: @vote
+    </p>
+}
     </div>
             }
+            counter++;
         }
-    }
+        
+}
 </div>

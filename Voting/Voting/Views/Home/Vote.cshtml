@@ -1,17 +1,44 @@
 ﻿@{
     ViewBag.Title = "Vote";
 }
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div class="row">
+    <h1 class="text-center">Available Questions to Vote On</h1>
+    @using (var questions = new VoteContext())
+    {
+        var listOfQuestions = questions.AskedQuestions.ToList();
+        foreach (var question in listOfQuestions)
+        {
+            var user = User.Identity.Name;
+            var asked = questions.UserVotes.SingleOrDefault(x => x.UserId == user && x.QuestionsId == question.Id);
+    <div class="col-md-4">
+        <h3>@question.Question</h3>
+        <p>Total Votes: @question.Votes</p>
+        <p>Yes: @question.For</p>
+        <p>No: @question.Against</p>
+        @if (asked == null)
+    {
+        using (Html.BeginForm())
+        {
+            var questNum = question.Id;
+            @Html.Hidden("questNum", questNum);
+        <button type="submit" class="btn btn-success" value=0 name="answer">Yes</button>
+        <button type="submit" class="btn btn-warning" value=1 name="answer">No</button>
+}
+}
+else
+{
+var vote = "";
+if (asked.Vote == 0)
+{ vote = "Yes"; }
+else { vote = "No"; }
+    <p>
+        You voted: @vote
+    </p>
+}
+    </div>
+        }
+    }
+</div>

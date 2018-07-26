@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
+using Voting.Models;
 
 namespace Voting.Controllers
 {
@@ -13,17 +11,56 @@ namespace Voting.Controllers
             return View();
         }
 
-        public ActionResult About()
+        [HttpPost]
+        [Authorize]
+        public ActionResult Index(string questNum, int answer)
         {
-            ViewBag.Message = "Your application description page.";
+            var castVote = new VoteLogic();
+            var user = User.Identity.Name;
+            castVote.CastVote(questNum, answer, user);
+            return View();
+        }
+
+        public ActionResult AskQuestions()
+        {
+            ViewBag.Message = "Ask a New Question.";
 
             return View();
         }
 
-        public ActionResult Contact()
+        [HttpPost]
+        [Authorize]
+        public ActionResult AskQuestions(string question)
         {
-            ViewBag.Message = "Your contact page.";
+            var stub = new Questions();
+            using(var questions = new VoteContext())
+            {
+                var test = questions.AskedQuestions.SingleOrDefault(x => x.Question == question);
+                if(test == null)
+                {
+                    stub.Question = question;
+                    questions.AskedQuestions.Add(stub);
+                    questions.SaveChanges();
+                }
+            }
 
+            return View();
+        }
+
+        public ActionResult Vote()
+        {
+            ViewBag.Message = "Voice Your Opinion";
+
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult Vote(string questNum, int answer)
+        {
+            var castVote = new VoteLogic();
+            var user = User.Identity.Name;
+            castVote.CastVote(questNum, answer, user);
             return View();
         }
     }

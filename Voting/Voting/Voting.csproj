@@ -201,11 +201,33 @@
     <Compile Include="Migrations\201807250458067_Initial Commit.Designer.cs">
       <DependentUpon>201807250458067_Initial Commit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807252331084_UserAndQuestionId.cs" />
+    <Compile Include="Migrations\201807252331084_UserAndQuestionId.Designer.cs">
+      <DependentUpon>201807252331084_UserAndQuestionId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807260821364_usingIntsNotBools.cs" />
+    <Compile Include="Migrations\201807260821364_usingIntsNotBools.Designer.cs">
+      <DependentUpon>201807260821364_usingIntsNotBools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807261732435_questionIdAsString.cs" />
+    <Compile Include="Migrations\201807261732435_questionIdAsString.Designer.cs">
+      <DependentUpon>201807261732435_questionIdAsString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807262112197_MovedVotesToOwnTable.cs" />
+    <Compile Include="Migrations\201807262112197_MovedVotesToOwnTable.Designer.cs">
+      <DependentUpon>201807262112197_MovedVotesToOwnTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807262223153_changedToId.cs" />
+    <Compile Include="Migrations\201807262223153_changedToId.Designer.cs">
+      <DependentUpon>201807262223153_changedToId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Questions.cs" />
+    <Compile Include="Models\UserVote.cs" />
+    <Compile Include="Models\VoteLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -288,6 +310,21 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201807250458067_Initial Commit.resx">
       <DependentUpon>201807250458067_Initial Commit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807252331084_UserAndQuestionId.resx">
+      <DependentUpon>201807252331084_UserAndQuestionId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807260821364_usingIntsNotBools.resx">
+      <DependentUpon>201807260821364_usingIntsNotBools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807261732435_questionIdAsString.resx">
+      <DependentUpon>201807261732435_questionIdAsString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807262112197_MovedVotesToOwnTable.resx">
+      <DependentUpon>201807262112197_MovedVotesToOwnTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807262223153_changedToId.resx">
+      <DependentUpon>201807262223153_changedToId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

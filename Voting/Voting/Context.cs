@@ -10,5 +10,6 @@ namespace Voting
             Database.SetInitializer(new DatabaseInitializer());
         }
         public DbSet<Questions> AskedQuestions { get; set; }
+        public DbSet<UserVote> UserVotes { get; set; }
     }
 }

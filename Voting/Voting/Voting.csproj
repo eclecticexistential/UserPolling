@@ -221,12 +221,17 @@
     <Compile Include="Migrations\201807262223153_changedToId.Designer.cs">
       <DependentUpon>201807262223153_changedToId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807280203215_voteToString.cs" />
+    <Compile Include="Migrations\201807280203215_voteToString.Designer.cs">
+      <DependentUpon>201807280203215_voteToString.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Questions.cs" />
     <Compile Include="Models\UserVote.cs" />
+    <Compile Include="Models\VoteForm.cs" />
     <Compile Include="Models\VoteLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -325,6 +330,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807262223153_changedToId.resx">
       <DependentUpon>201807262223153_changedToId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807280203215_voteToString.resx">
+      <DependentUpon>201807280203215_voteToString.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

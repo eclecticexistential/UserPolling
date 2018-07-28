@@ -22,20 +22,16 @@
     {
         using (Html.BeginForm())
         {
-            var questNum = question.Id;
-            @Html.Hidden("questNum", questNum);
-        <button type="submit" class="btn btn-success" value=0 name="answer">Yes</button>
-        <button type="submit" class="btn btn-warning" value=1 name="answer">No</button>
+            @Html.Hidden("UserId", User.Identity.Name);
+        @Html.Hidden("Question", question.Question);
+    <button type="submit" class="btn btn-success" name="Vote" value="Yes">Yes</button>
+    <button type="submit" class="btn btn-warning" name="Vote" value="No">No</button>
 }
 }
 else
 {
-var vote = "";
-if (asked.Vote == 0)
-{ vote = "Yes"; }
-else { vote = "No"; }
     <p>
-        You voted: @vote
+        You voted: @asked.Vote
     </p>
 }
     </div>

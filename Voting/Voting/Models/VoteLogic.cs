@@ -7,21 +7,22 @@ namespace Voting.Models
 {
     public class VoteLogic
     {
-        public void CastVote(string questNum, int answer, string user)
+        public void CastVote(VoteForm vote)
         {
-            int numUse = int.Parse(questNum);
-            UserVote stub = new UserVote();
             using (var questions = new VoteContext())
             {
-                var currQuest = questions.AskedQuestions.SingleOrDefault(x => x.Id == numUse);
-                var hasAsked = questions.UserVotes.SingleOrDefault(x => x.QuestionsId == numUse && x.UserId == user);
+                var currQuest = questions.AskedQuestions.SingleOrDefault(x => x.Question == vote.Question);
+                var hasAsked = questions.UserVotes.SingleOrDefault(x => x.QuestionsId == currQuest.Id && x.UserId == vote.UserId);
                 if (hasAsked == null)
                 {
-                    stub.UserId = user;
-                    stub.QuestionsId = numUse;
-                    stub.Vote = answer;
-                    questions.UserVotes.Add(stub);
-                    if (answer == 0)
+                    var addVoteToDB = new UserVote()
+                    {
+                        UserId = vote.UserId,
+                        QuestionsId = currQuest.Id,
+                        Vote = vote.Vote
+                    };
+                    questions.UserVotes.Add(addVoteToDB);
+                    if (vote.Vote == "Yes")
                     {
                         currQuest.For += 1;
                     }

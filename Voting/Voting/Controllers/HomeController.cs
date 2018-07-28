@@ -13,12 +13,17 @@ namespace Voting.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult Index(string questNum, int answer)
+        public ActionResult Index(string UserId, string Question, string Vote)
         {
+            VoteForm vote = new VoteForm
+            {
+                UserId = UserId,
+                Question = Question,
+                Vote = Vote
+            };
             var castVote = new VoteLogic();
-            var user = User.Identity.Name;
-            castVote.CastVote(questNum, answer, user);
-            return View();
+            castVote.CastVote(vote);
+            return RedirectToAction("Index");
         }
 
         public ActionResult AskQuestions()
@@ -43,7 +48,7 @@ namespace Voting.Controllers
                     questions.SaveChanges();
                 }
             }
-
+            ViewBag.Message = "Question Added.";
             return View();
         }
 
@@ -56,12 +61,17 @@ namespace Voting.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult Vote(string questNum, int answer)
+        public ActionResult Vote(string UserId, string Question, string Vote)
         {
+            VoteForm vote = new VoteForm
+            {
+                UserId = UserId,
+                Question = Question,
+                Vote = Vote
+            };
             var castVote = new VoteLogic();
-            var user = User.Identity.Name;
-            castVote.CastVote(questNum, answer, user);
-            return View();
+            castVote.CastVote(vote);
+            return RedirectToAction("Vote");
         }
     }
 }
